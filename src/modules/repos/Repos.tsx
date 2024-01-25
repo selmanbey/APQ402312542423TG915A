@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useSearchParams } from "react-router-dom";
-import { getRepositories } from "./utils";
+import { getRepos, getPageItems, filterRepos } from "./utils";
 import { OPEN_ISSUES, ORG, PAGE, REPO } from "./consts";
 import {
   Results,
@@ -11,28 +11,37 @@ import {
   NoResults,
 } from "./components";
 import styles from "./Repos.module.css";
-import { Spinner } from "components";
+import { Button, Spinner } from "components";
 import { Error } from "modules";
 import { BaseError, ApiError } from "modules/errors/Errors";
 import { handleError } from "modules/errors/utils";
+import { GithubRepo } from "./types";
+import RefreshIcon from "assets/refresh.svg";
 
 const PER_PAGE = 10;
 const STALE_TIME = 300000; // 5 minutes
 
 const Repos: FC = () => {
-  const [searchParams] = useSearchParams();
+  // URL PARAMS
+  const [searchParams, setSearchParams] = useSearchParams();
   const org = searchParams.get(ORG) || "";
-  const repo = searchParams.get(REPO) || "";
   const page = parseInt(searchParams.get(PAGE) || "1", 10);
-  const openIssues = searchParams.get(OPEN_ISSUES) || "*..*";
+  const filters = {
+    repoName: searchParams.get(REPO) || "",
+    openIssues: searchParams.get(OPEN_ISSUES) || "*..*",
+  };
 
+  // COMPONENT STATES
   const [customError, setCustomError] = useState<
     BaseError | ApiError | undefined
   >(undefined);
+  const [manualRetry, setManualRetry] = useState(0);
+  const [repos, setRepos] = useState<GithubRepo[]>([]);
 
-  const { data, isFetching, error } = useQuery(
-    ["repositories", { org, repo, openIssues, perPage: PER_PAGE, page }],
-    () => getRepositories({ org, repo, openIssues, perPage: PER_PAGE, page }),
+  // DATA FETCHING
+  const { data, isFetching } = useQuery(
+    ["repos", { org, manualRetry }],
+    () => getRepos({ org }),
     {
       keepPreviousData: true,
       staleTime: STALE_TIME,
@@ -40,12 +49,23 @@ const Repos: FC = () => {
     }
   );
 
+  // FRONT-END FILTERING
   useEffect(() => {
-    if (!error) return;
-    setCustomError(handleError(error));
-  }, [error]);
+    setCustomError(undefined); // Remove stale error with new results
+    setRepos(filterRepos(data?.items, filters));
+    setSearchParams((prevParams) => {
+      prevParams.set(PAGE, "1");
+      return prevParams;
+    });
+  }, [data?.items, filters.repoName, filters.openIssues]);
 
-  const pages = Math.ceil((data?.total_count || 10) / PER_PAGE);
+  // ERROR HANDLING
+  useEffect(() => {
+    if (!data?.error) return;
+    setCustomError(handleError(data.error));
+  }, [data?.error]);
+
+  const pages = Math.ceil((repos.length || PER_PAGE) / PER_PAGE);
 
   return (
     <div className={styles.repos}>
@@ -58,7 +78,14 @@ const Repos: FC = () => {
 
       {/* SEARCH & FILTERS */}
       <div className={styles.inputs}>
-        <TextParamInput paramName={ORG} placeholder="Enter organization" />
+        <div className={styles.searchInput}>
+          <TextParamInput paramName={ORG} placeholder="Enter organization" />
+          {org && customError && (
+            <Button onClick={() => setManualRetry(manualRetry + 1)}>
+              <img src={RefreshIcon} alt="Refresh" />
+            </Button>
+          )}
+        </div>
         {org && (
           <div className={styles.filters}>
             <p className={styles.filtersLabel}>filter ::</p>
@@ -76,9 +103,9 @@ const Repos: FC = () => {
       {Boolean(org) && (
         <div className={styles.table}>
           {isFetching && <Spinner />}
-          {data && Boolean(data.items?.length) ? (
+          {repos.length ? (
             <>
-              <Results items={data.items} />
+              <Results items={getPageItems(repos, page)} />
               <Pagination pages={pages} />
             </>
           ) : (

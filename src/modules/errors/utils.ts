@@ -22,8 +22,8 @@ export const handleError = (error: unknown): BaseError | ApiError => {
         message = "Unauthorized: Authentication failed.";
         break;
       case 403:
-        message =
-          "Forbidden: The request is understood, but it has been refused or access is not allowed.";
+      case 429:
+        message = "Too many request. API rate limit exceeded.";
         break;
       case 404:
         message = "Not Found: The requested resource could not be found.";
@@ -31,8 +31,11 @@ export const handleError = (error: unknown): BaseError | ApiError => {
       case 422:
         message = "There are no results for this query";
         break;
+      case 500:
+        message = "There seems to be an internal server error with Github API";
+        break;
       default:
-        message = `Unhandled status code: ${error.status}`;
+        message = `${error.status}: Unknown server error`;
     }
 
     return new ApiError(message, error.status);

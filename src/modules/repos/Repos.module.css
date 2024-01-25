@@ -9,12 +9,37 @@
 .inputs {
   display: flex;
   align-items: center;
-  margin-bottom: var(--sm);
+  margin-top: var(--sm);
+  margin-bottom: var(--lg);
+
+  .searchInput {
+    display: flex;
+    justify-content: space-between;
+    margin-right: var(--sm);
+
+    input {
+      min-width: 160px;
+    }
+
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: var(--xxs);
+      margin-right: calc(var(--xs) * -1);
+      background-color: transparent;
+      border: none;
+      padding: none;
+
+      img {
+        height: 100%;
+      }
+    }
+  }
 
   .filters {
     display: flex;
     align-items: center;
-    margin-left: var(--md);
     border-left: 2px solid var(--darkest-color);
     width: 100%;
   }

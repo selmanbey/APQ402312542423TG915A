@@ -2,7 +2,6 @@ import Input from "components/Input/Input";
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import styles from "./TextParamInput.module.css";
-import { PAGE } from "modules/repos/consts";
 
 interface Props {
   paramName: string;
@@ -26,7 +25,6 @@ const TextParamInput: React.FC<Props> = ({
         const prevValue = prevParams.get(paramName);
         if (value !== prevValue) {
           prevParams.set(paramName, value);
-          prevParams.set(PAGE, "1"); // Reset pagination when you trigger a new search with an updated filter
         }
 
         return prevParams;

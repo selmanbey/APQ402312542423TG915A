@@ -3,7 +3,6 @@
 .textParamInput {
   display: flex;
   align-items: center;
-  margin: var(--sm) 0;
 
   label {
     font-weight: bold;

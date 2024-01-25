@@ -3,7 +3,6 @@
 
 .inputWrapper {
   position: relative;
-  border: 1px solid black;
 }
 
 .input {
@@ -21,7 +20,11 @@
 }
 
 .inputError {
-  border: 1px solid var(--error-color);
+  border-color: var(--error-color);
+
+  &:focus {
+    border-color: var(--error-color);
+  }
 }
 
 .errorText {

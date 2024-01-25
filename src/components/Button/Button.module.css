@@ -4,9 +4,9 @@
 .button {
   padding: var(--xxs) var(--sm);
   cursor: pointer;
-  transition: filter 0.3s;
   border: none;
   border-radius: var(--xxs);
+  transition: filter 0.3s;
 
   &:hover:not(:disabled) {
     filter: brightness(1.5);
