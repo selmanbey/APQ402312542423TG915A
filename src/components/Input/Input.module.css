@@ -1,0 +1,33 @@
+@import "styles/spacing.module.css";
+@import "styles/colors.module.css";
+
+.inputWrapper {
+  position: relative;
+  border: 1px solid black;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  padding: var(--xxs);
+  border: 1px solid var(--neutral-color);
+  border-radius: var(--xxs);
+  transition: border-color 0.3s;
+
+  &:focus {
+    border-color: var(--primary-color);
+    outline: none;
+  }
+}
+
+.inputError {
+  border: 1px solid var(--error-color);
+}
+
+.errorText {
+  position: absolute;
+  width: max-content;
+  top: calc(100% + var(--xxs));
+  font-size: smaller;
+  color: var(--error-color);
+}

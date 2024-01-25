@@ -1,0 +1,43 @@
+@import "styles/spacing.module.css";
+@import "styles/colors.module.css";
+
+.errorDialog {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--error-color);
+  padding: var(--xs) 0;
+  text-align: center;
+  animation: slideIn 0.5s forwards;
+}
+
+.errorDialog p {
+  color: white;
+}
+
+.errorDialog button {
+  position: absolute;
+  top: 50%;
+  right: var(--sm);
+  background-color: transparent;
+  color: white;
+  font-size: 1.3rem;
+  border: none;
+  padding: var(--xxs);
+  border-radius: 50%;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: none;
+  }
+}

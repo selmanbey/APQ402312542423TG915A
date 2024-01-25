@@ -1,0 +1,23 @@
+@import "styles/fonts.module.css";
+@import "styles/colors.module.css";
+
+body {
+  margin: 0;
+  font-family: var(--main-font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--darkest-color);
+  font-size: 0.9rem;
+}
+
+code {
+  font-family: var(--code-font);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color:var(--darkest-color)
+}

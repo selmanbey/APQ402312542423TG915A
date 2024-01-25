@@ -1,0 +1,23 @@
+@import "styles/spacing.module.css";
+
+.rangeParamInput {
+  display: flex;
+  align-items: center;
+  margin: var(--sm) 0;
+
+  label {
+    font-weight: bold;
+    font-style: italic;
+    margin: 0 var(--xs);
+  }
+
+  input {
+    min-width: 0;
+    width: 60px;
+  }
+
+  p {
+    display: inline-block;
+    margin: 0 var(--xxs);
+  }
+}

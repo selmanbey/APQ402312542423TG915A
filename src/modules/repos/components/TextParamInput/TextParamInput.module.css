@@ -1,0 +1,17 @@
+@import "styles/spacing.module.css";
+
+.textParamInput {
+  display: flex;
+  align-items: center;
+  margin: var(--sm) 0;
+
+  label {
+    font-weight: bold;
+    font-style: italic;
+    margin-right: var(--xs);
+  }
+}
+
+.fullWidthInput {
+  width: 100%;
+}

@@ -1,0 +1,63 @@
+@import "styles/spacing.module.css";
+@import "styles/colors.module.css";
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.header {
+  position: relative;
+  background-color: var(--darkest-color);
+  color: white;
+  padding: var(--sm);
+  border: 1px solid var(--neutral-color);
+  text-align: left;
+
+  .arrow {
+    display: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: var(--xxs) solid transparent;
+    border-right: var(--xxs) solid transparent;
+    border-top: var(--xxs) solid white;
+    top: 50%;
+    transform: translateY(-50%);
+    right: var(--sm);
+  }
+
+  .sticky-arrow {
+    display: block;
+  }
+
+  &:hover .arrow {
+    display: block;
+  }
+
+  .arrow-asc {
+    border-top: var(--xxs) solid white;
+    border-bottom: none;
+  }
+
+  .arrow-desc {
+    border-top: none;
+    border-bottom: var(--xxs) solid white;
+
+  }
+}
+
+.data {
+  padding: var(--sm);
+  border: 1px solid var(--neutral-color);
+  text-align: left;
+  overflow: hidden;
+}
+
+.row {
+  background-color: white;
+
+  &:nth-child(odd) {
+    filter: brightness(0.97);
+  }
+}

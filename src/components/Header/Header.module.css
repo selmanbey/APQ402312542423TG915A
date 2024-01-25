@@ -1,0 +1,21 @@
+@import "styles/colors.module.css";
+@import "styles/spacing.module.css";
+@import "styles/fonts.module.css";
+@import "styles/layout.module.css";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: var(--HEADER-HEIGHT);
+  width: 100vw;
+  padding-left: var(--sm);
+  padding-right: var(--sm);
+  background-color: var(--darkest-color);
+}
+
+
+.logo {
+  height: 70%;
+  filter: invert()
+}

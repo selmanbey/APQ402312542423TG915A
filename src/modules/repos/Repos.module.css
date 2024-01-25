@@ -1,0 +1,39 @@
+@import "styles/spacing.module.css";
+
+.repos {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.inputs {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--sm);
+
+  .filters {
+    display: flex;
+    align-items: center;
+    margin-left: var(--md);
+    border-left: 2px solid var(--darkest-color);
+    width: 100%;
+  }
+
+  .filtersLabel {
+    margin: 0 var(--sm);
+    margin-right: var(--xxs);
+    display: inline-block;
+    font-weight: bold;
+  }
+
+  input {
+    margin: 0;
+  }
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+}

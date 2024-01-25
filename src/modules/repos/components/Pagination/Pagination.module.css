@@ -1,0 +1,18 @@
+@import "styles/colors.module.css";
+@import "styles/spacing.module.css";
+
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: var(--md);
+}
+
+.button {
+  padding: var(--xxs) var(--xs);
+}
+
+
+.pageInfo {
+  margin: 0 var(--md);
+}
