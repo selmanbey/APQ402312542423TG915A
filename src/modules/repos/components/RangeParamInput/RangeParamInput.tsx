@@ -46,7 +46,7 @@ const RangeParamInput: React.FC<Props> = ({ paramName, label }) => {
         }
         return prevParams;
       });
-    }, 300);
+    }, 400);
 
     return () => {
       clearTimeout(debounce);

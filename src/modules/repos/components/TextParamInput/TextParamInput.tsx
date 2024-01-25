@@ -29,7 +29,7 @@ const TextParamInput: React.FC<Props> = ({
 
         return prevParams;
       });
-    }, 300);
+    }, 500);
 
     return () => {
       clearTimeout(debounce);
