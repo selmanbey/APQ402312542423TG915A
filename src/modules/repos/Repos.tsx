@@ -26,10 +26,8 @@ const Repos: FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const org = searchParams.get(ORG) || "";
   const page = parseInt(searchParams.get(PAGE) || "1", 10);
-  const filters = {
-    repoName: searchParams.get(REPO) || "",
-    openIssues: searchParams.get(OPEN_ISSUES) || "*..*",
-  };
+  const repoName = searchParams.get(REPO) || "";
+  const openIssues = searchParams.get(OPEN_ISSUES) || "*..*";
 
   // COMPONENT STATES
   const [customError, setCustomError] = useState<
@@ -52,12 +50,12 @@ const Repos: FC = () => {
   // FRONT-END FILTERING
   useEffect(() => {
     setCustomError(undefined); // Remove stale error with new results
-    setRepos(filterRepos(data?.items, filters));
+    setRepos(filterRepos(data?.items, { repoName, openIssues }));
     setSearchParams((prevParams) => {
       prevParams.set(PAGE, "1");
       return prevParams;
     });
-  }, [data?.items, filters.repoName, filters.openIssues]);
+  }, [data?.items, repoName, openIssues]);
 
   // ERROR HANDLING
   useEffect(() => {

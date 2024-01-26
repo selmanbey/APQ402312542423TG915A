@@ -38,10 +38,10 @@
   }
 
   .filters {
+    display: flex !important; /* something in build process drops this rule without !important. worth further investigating. */
     align-items: center;
     border-left: 2px solid var(--darkest-color);
     width: 100%;
-    display: flex;
   }
 
   .filtersLabel {
