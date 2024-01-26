@@ -34,8 +34,8 @@ http://localhost:3000/
 
 - I admit defeat when it comes to organization autocomplete. Writing an autocomplete input component is not an issue at all, but Github REST API, once again, does not provide any sensible way of filtering list of organizations by a given organization name. And it seems a rather impractical, highly costly and inefficient idea to make a request loop until we get all the organizations there is on Github and then provide an autocompleting on front-end.
 
-In real-life circumstances, I believe a solution might be to write an independent micro service that fetches and caches all the organization names from github, does a daily check to update its cache, and provides the needed filtering on its own cache. But doing something similar on the client side sounds a little like madnes, even if you were to cache this data on localStorage. We don't know how many organizations exist in Github and looping through requests until you reach the end (and this is to happen on every new user / browser) is a sure way to eat up your rate limits.
+  In real-life circumstances, I believe a solution might be to write an independent micro service that fetches and caches all the organization names from github, does a daily check to update its cache, and provides the needed filtering on its own cache. But doing something similar on the client side sounds a little like madnes, even if you were to cache this data on localStorage. We don't know how many organizations exist in Github and looping through requests until you reach the end (and this is to happen on every new user / browser) is a sure way to eat up your rate limits.
 
-So the only autocomplete right now is the one that comes with the default html input behaviour, where browsers can suggest or automatically fill in values based on user's earlier inputs.
+  So the only autocomplete right now is the one that comes with the default html input behaviour, where browsers can suggest or automatically fill in values based on user's earlier inputs.
 
-Having said that, as the owners of the challenge, if you have neater approaches to this autocompletion problem, I'd love to hear them, discuss them and learn from them.
+  Having said that, as the owners of the challenge, if you have neater approaches to this autocompletion problem, I'd love to hear them, discuss them and learn from them.
