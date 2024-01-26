@@ -94,7 +94,7 @@ export const filterRepos = (
     const max = maxParam ? parseInt(maxParam) : Infinity;
 
     repos = repos.filter(
-      (r) => r.open_issues_count >= min && r.open_issues_count < max
+      (r) => r.open_issues_count >= min && r.open_issues_count <= max
     );
   }
 
